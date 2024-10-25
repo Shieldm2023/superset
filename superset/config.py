@@ -571,7 +571,14 @@ COMMON_BOOTSTRAP_OVERRIDES_FUNC: Callable[
 #     }]
 
 # This is merely a default
-EXTRA_CATEGORICAL_COLOR_SCHEMES: list[dict[str, Any]] = []
+EXTRA_CATEGORICAL_COLOR_SCHEMES: list[dict[str, Any]] = [{
+         "id": 'fortisureITColors',
+         "description": '',
+         "label": 'Fortisure IT Colors',
+         "isDefault": True,
+         "colors":
+          ['#7e0a18','#252e5e','#3e41ac','#33503b','#6bab3a', '#760b1a','#3a3a3a']
+     }]
 
 # THEME_OVERRIDES is used for adding custom theme to superset
 # example code for "My theme" custom scheme
@@ -590,7 +597,9 @@ EXTRA_CATEGORICAL_COLOR_SCHEMES: list[dict[str, Any]] = []
 #   }
 # }
 
-THEME_OVERRIDES: dict[str, Any] = {}
+THEME_OVERRIDES: dict[str, Any] = {
+
+}
 
 # EXTRA_SEQUENTIAL_COLOR_SCHEMES is used for adding custom sequential color schemes
 # EXTRA_SEQUENTIAL_COLOR_SCHEMES =  [
