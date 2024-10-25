@@ -50,6 +50,17 @@ RUN npm run ${BUILD_CMD}
 ######################################################################
 # Final lean image...
 ######################################################################
+
+FROM apache/superset:4.0.2
+USER root
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
+RUN curl https://packages.microsoft.com/config/debian/11/prod.list | tee /etc/apt/sources.list.d/mssql-release.list
+RUN apt-get update
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18
+RUN apt-get install unixodbc-dev -y
+RUN pip install pyodbc
+USER superset
+
 FROM python:${PY_VER} AS lean
 
 WORKDIR /app
@@ -141,6 +152,3 @@ FROM lean AS ci
 COPY --chown=superset:superset --chmod=755 ./docker/*.sh /app/docker/
 
 CMD ["/app/docker/docker-ci.sh"]
-
-FROM apache/superset:4.0.0
-RUN pip install pymssql
